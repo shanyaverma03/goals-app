@@ -13,12 +13,14 @@ import GoalItem from "./components/GoalItem";
 
 export default function App() {
   const [goalsList, setGoalsList] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   const addGoalHandler = (goal) => {
     setGoalsList((prevGoalsList) => [
       ...prevGoalsList,
       { text: goal, id: Math.random().toString() },
     ]);
+    setShowModal(false);
   };
 
   const deleteGoalHandler = (id) => {
@@ -27,9 +29,23 @@ export default function App() {
     );
   };
 
+  const closeModalHandler = () => {
+    setShowModal(false);
+  };
   return (
     <View style={styles.appContainer}>
-      <GoalInput addGoalHandler={addGoalHandler} />
+      <Button
+        title="Add Goal"
+        color="#5e0acc"
+        onPress={() => setShowModal(true)}
+      />
+      {showModal && (
+        <GoalInput
+          addGoalHandler={addGoalHandler}
+          showModal={showModal}
+          onCloseModal={closeModalHandler}
+        />
+      )}
       <View style={styles.goalsContainer}>
         <FlatList
           data={goalsList}
