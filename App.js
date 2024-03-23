@@ -36,7 +36,7 @@ export default function App() {
     <View style={styles.appContainer}>
       <Button
         title="Add Goal"
-        color="#5e0acc"
+        color="coral"
         onPress={() => setShowModal(true)}
       />
       {showModal && (
